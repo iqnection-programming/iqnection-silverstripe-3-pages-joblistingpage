@@ -1,119 +1,135 @@
-<?
+<?php
 	class JobCategory extends DataObject
 	{
-		private static $db = array(
+	    private static $db = array(
 			"SortOrder" => "Int",  
 			"Title" => "Varchar(255)", 
 		);
 		
-		private static $has_one = array(
+	    private static $has_one = array(
 			"JobListingPage" => "JobListingPage"
 		); 		
 		
-		private static $summary_fields = array(
+	    private static $summary_fields = array(
 			'Title' => 'Title'
 		);
 		
-        public function getCMSFields()
-        {
-			$fields = new FieldList();
+	    public function getCMSFields()
+	    {
+	        $fields = new FieldList();
 
-			$fields->push( new TextField("Title", "Title:") );
+	        $fields->push(new TextField("Title", "Title:"));
 			
-			return $fields;
-        }
+	        return $fields;
+	    }
 		
-		public function canCreate($member = null) { return true; }
-		public function canDelete($member = null) { return true; }
-		public function canEdit($member = null)   { return true; }
-		public function canView($member = null)   { return true; }
+	    public function canCreate($member = null)
+	    {
+	        return true;
+	    }
+	    public function canDelete($member = null)
+	    {
+	        return true;
+	    }
+	    public function canEdit($member = null)
+	    {
+	        return true;
+	    }
+	    public function canView($member = null)
+	    {
+	        return true;
+	    }
 	}
 	
 	class Position extends DataObject
 	{
-		private static $db = array(
+	    private static $db = array(
 			"SortOrder" => "Int", 
 			"Title" => "Varchar(255)", 
 			"Location" => "Varchar(255)",
 			"Content" => "HTMLText"
 		);
 		
-		private static $has_one = array(
+	    private static $has_one = array(
 			"JobListingPage" => "JobListingPage",
 			"JobCategory" => "JobCategory"
 		); 
 		
-		private static $summary_fields = array(
+	    private static $summary_fields = array(
 			"Title" => "Job Title",
 			"CategoryName" => "Category",
 			"Location" => "Location"
 		);
 		
-        public function getCMSFields()
-        {
-			$fields = new FieldList();
+	    public function getCMSFields()
+	    {
+	        $fields = new FieldList();
 
-			$fields->push( new TextField("Title", "Job Title:") );
-			if ($this->JobListingPageID)
-			{
-				$fields->push( new DropdownField("JobCategoryID", "Category:", $this->GetJobCategories()) );
-			}
-			else
-			{
-				$fields->push( new ReadonlyField('JobCategoryID', 'Category:','You must save before you can select a category') );
-			}
-			$fields->push( new TextField("Location", "Location:") );
-			$fields->push( new HTMLEditorField("Content", "Content/Description:") );
+	        $fields->push(new TextField("Title", "Job Title:"));
+	        if ($this->JobListingPageID) {
+	            $fields->push(new DropdownField("JobCategoryID", "Category:", $this->GetJobCategories()));
+	        } else {
+	            $fields->push(new ReadonlyField('JobCategoryID', 'Category:', 'You must save before you can select a category'));
+	        }
+	        $fields->push(new TextField("Location", "Location:"));
+	        $fields->push(new HTMLEditorField("Content", "Content/Description:"));
 
-			return $fields;
-        }
+	        return $fields;
+	    }
 		
-		public function GetJobCategories()
-		{
-			$cats = array("" => "");
+	    public function GetJobCategories()
+	    {
+	        $cats = array("" => "");
 
-			if ($this->JobListingPageID > 0)
-			{
-				foreach($this->JobListingPage()->JobCategories() as $cat)
-				{
-					$cats[$cat->ID] = $cat->Title;
-				}
-			}
-			return $cats;
-		}
+	        if ($this->JobListingPageID > 0) {
+	            foreach ($this->JobListingPage()->JobCategories() as $cat) {
+	                $cats[$cat->ID] = $cat->Title;
+	            }
+	        }
+	        return $cats;
+	    }
 		
-		public function CategoryName()
-		{
-			if ($this->JobCategoryID > 0)
-			{
-				return $this->JobCategory()->Title;
-			}
-			else
-			{
-				return "(none)";
-			}
-		}
+	    public function CategoryName()
+	    {
+	        if ($this->JobCategoryID > 0) {
+	            return $this->JobCategory()->Title;
+	        } else {
+	            return "(none)";
+	        }
+	    }
 		
-		public function canCreate($member = null) { return true; }
-		public function canDelete($member = null) { return true; }
-		public function canEdit($member = null)   { return true; }
-		public function canView($member = null)   { return true; }
+	    public function canCreate($member = null)
+	    {
+	        return true;
+	    }
+	    public function canDelete($member = null)
+	    {
+	        return true;
+	    }
+	    public function canEdit($member = null)
+	    {
+	        return true;
+	    }
+	    public function canView($member = null)
+	    {
+	        return true;
+	    }
 		
-		public function Link()
-		{
-			return $this->JobListingPage()->Link("details/".$this->ID);
-		}
+	    public function Link()
+	    {
+	        return $this->JobListingPage()->Link("details/".$this->ID);
+	    }
 		
-		public function ApplyLink()
-		{
-			return $this->JobListingPage()->Link('apply/'.$this->ID);
-		}
+	    public function ApplyLink()
+	    {
+	        return $this->JobListingPage()->Link('apply/'.$this->ID);
+	    }
 	}
 	
-	class JobListingPageSubmission extends FormPageSubmission 
+	class JobListingPageSubmission extends FormPageSubmission
 	{
 		
-        private static $db = array(
+	    private static $db = array(
 			'JobTitle' => 'Varchar(255)',
 			'JobLocation' => 'Varchar(255)',
             'FirstName' => 'Varchar(255)',
@@ -128,12 +144,12 @@
 			'Comments' => 'Text'
         );
 		
-		private static $has_one = array(
+	    private static $has_one = array(
 			'CoverLetter' => 'File',
 			'Resume' => 'File'
 		);
 		
-		private static $summary_fields = array(
+	    private static $summary_fields = array(
 			"Created" => "Date",
 			"JobTitle" => 'Job Title',
 			'JobLocation' => 'Job Location',
@@ -143,92 +159,101 @@
 			"Email" => "Email Address",
 		);
 		
-		private static $default_sort = "Created DESC";
+	    private static $default_sort = "Created DESC";
 				
-		public function canCreate($member = null) { return false; }
-		public function canDelete($member = null) { return true; }
-		public function canEdit($member = null)   { return false; }
-		public function canView($member = null)   { return true; }
-		
-    }
+	    public function canCreate($member = null)
+	    {
+	        return false;
+	    }
+	    public function canDelete($member = null)
+	    {
+	        return true;
+	    }
+	    public function canEdit($member = null)
+	    {
+	        return false;
+	    }
+	    public function canView($member = null)
+	    {
+	        return true;
+	    }
+	}
 	
 	class JobListingPage extends FormPage
 	{
-		static $db = array(
+	    public static $db = array(
 		);
 		
-		static $has_many = array(
+	    public static $has_many = array(
 			"JobCategories" => "JobCategory",
 			"Positions" => "Position"
 		);
 		
-		public function getCMSFields()
-		{
-			$fields = parent::getCMSFields();
+	    public function getCMSFields()
+	    {
+	        $fields = parent::getCMSFields();
 			
-			$fields->addFieldToTab('Root.Content.Categories', new GridField(
+	        $fields->addFieldToTab('Root.Content.Categories', new GridField(
 				'JobCategories',
 				'Job Categories',
 				$this->JobCategories(),
 				GridFieldConfig_RecordEditor::create()->addComponent(
-					new GridFieldSortableRows('SortOrder')	,
+					new GridFieldSortableRows('SortOrder'),
 					'GridFieldButtonRow'
 				)
 			));
 			
-			$fields->addFieldToTab('Root.Content.Jobs', new GridField(
+	        $fields->addFieldToTab('Root.Content.Jobs', new GridField(
 				'Positions',
 				'Position',
 				$this->Positions(),
 				GridFieldConfig_RecordEditor::create()->addComponent(
-					new GridFieldSortableRows('SortOrder')	,
+					new GridFieldSortableRows('SortOrder'),
 					'GridFieldButtonRow'
 				)
 			));
 			
-			return $fields;
-		}	
+	        return $fields;
+	    }	
 		
-		public function CategoriesForDropdown()
-		{
-			$cats = "<option value='0'></option>";
+	    public function CategoriesForDropdown()
+	    {
+	        $cats = "<option value='0'></option>";
 
-			if ($this->ID > 0)
-			{
-				foreach ($this->JobCategories() as $cat)
-				{
-					$cats .= "<option value='".$cat->ID."'>".htmlspecialchars($cat->Title)."</option>";
-				}
-			}
-			return $cats;
-		}		
+	        if ($this->ID > 0) {
+	            foreach ($this->JobCategories() as $cat) {
+	                $cats .= "<option value='".$cat->ID."'>".htmlspecialchars($cat->Title)."</option>";
+	            }
+	        }
+	        return $cats;
+	    }
 	}
 	
 	class JobListingPage_Controller extends FormPage_Controller
 	{
-		static $allowed_actions = array(
+	    public static $allowed_actions = array(
 			'details',
 			'apply'
 		);
 		
-		public function init()
-		{
-			parent::init();
-		}
+	    public function init()
+	    {
+	        parent::init();
+	    }
 		
-		function PageJS()
-		{
-			return array_merge(
+	    public function PageJS()
+	    {
+	        return array_merge(
 				parent::PageJS(),
 				array(
 					"iq-joblistingpage/javascript/jquery.tablesorter.min.js"
 				)
 			);
-		}
+	    }
 		
-		public function FormConfig()
-		{
-			return array(
+	    public function FormConfig()
+	    {
+	        return array(
 				"useNospam" => true,
 				"sendToAll" => true,
 				"trackFormSubmit" => array(
@@ -238,11 +263,11 @@
 					"value" => 1
 				)
 			);
-		}
+	    }
 		
-		public function FormFields()
-		{
-			return array(
+	    public function FormFields()
+	    {
+	        return array(
 				"JobTitle" => array(
 					"FieldType" => "HiddenField",
 					"Label" => "Job Title",
@@ -310,43 +335,38 @@
 					"Label" => "Comments",
 				),
 			);
-		}
+	    }
 		
-		public function details()
-		{
-			if($job = $this->findJobby())
-			{
-				return $this->Customise(array(
+	    public function details()
+	    {
+	        if ($job = $this->findJobby()) {
+	            return $this->Customise(array(
 					"Jobby" => $job
 				));
-			}
-			else
-			{
-				Director::redirectBack();	
-			}
-		}
+	        } else {
+	            Director::redirectBack();
+	        }
+	    }
 		
-		public function apply()
-		{
-			if($job = $this->findJobby())
-			{
-				return $this->Customise(array(
+	    public function apply()
+	    {
+	        if ($job = $this->findJobby()) {
+	            return $this->Customise(array(
 					"Jobby" => $job
 				));
-			}
-			else
-			{
-				Director::redirectBack();	
-			}
-		}
+	        } else {
+	            Director::redirectBack();
+	        }
+	    }
 		
-		public function findJobby()
-		{
-			$job = false;
-			$id = $this->request->param('ID');
-			if($id)$job = DataObject::get_one('Position','JobListingPageID='.$this->ID.' AND ID='.$id);
-			return $job;
-		}
-		
+	    public function findJobby()
+	    {
+	        $job = false;
+	        $id = $this->request->param('ID');
+	        if ($id) {
+	            $job = DataObject::get_one('Position', 'JobListingPageID='.$this->ID.' AND ID='.$id);
+	        }
+	        return $job;
+	    }
 	}
 ?>
