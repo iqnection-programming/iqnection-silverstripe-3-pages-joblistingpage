@@ -193,7 +193,7 @@
 	    {
 	        $fields = parent::getCMSFields();
 			
-	        $fields->addFieldToTab('Root.Content.Categories', new GridField(
+	        $fields->addFieldToTab('Root.Categories', new GridField(
 				'JobCategories',
 				'Job Categories',
 				$this->JobCategories(),
@@ -203,7 +203,7 @@
 				)
 			));
 			
-	        $fields->addFieldToTab('Root.Content.Jobs', new GridField(
+	        $fields->addFieldToTab('Root.Jobs', new GridField(
 				'Positions',
 				'Position',
 				$this->Positions(),
@@ -361,12 +361,7 @@
 		
 	    public function findJobby()
 	    {
-	        $job = false;
-	        $id = $this->request->param('ID');
-	        if ($id) {
-	            $job = DataObject::get_one('Position', 'JobListingPageID='.$this->ID.' AND ID='.$id);
-	        }
-	        return $job;
+	        return ($id = $this->request->param('ID')) ? $this->Positions()->byId($id) : false;
 	    }
 	}
 ?>
