@@ -43,9 +43,17 @@
 #job_nav a							{ font-weight:bold; float:right; font-size:16px; }
 
 @media (max-width:500px){
-	.table_head						{ display:none; }
+	#job-search-box > div 			{ float:none; width:100%; }	
+	#job-search-box > div:first-of-type	{ margin-bottom:10px; }	
+	#job-search-box label,
+	#job-search-box select, 
+	#job-search-box input 			{ float:none; }
+	#job_list thead 				{ display:none; }
 	#job_list						{ border-top: 1px solid #c1dce2; }
-	#job_list > li > a > span		{ width:100%; padding-left: 90px; text-align:left !important; border:none; line-height:15px; }
-	#job_list > li > a > span:before { content:attr(data-title)':'; text-align:right; float:left; margin-left:-90px; width:80px; }
+	#job_list tbody td				{ text-align:left !important; border:none; line-height:15px; display:block; padding: 0 10px; }
+	#job_list tbody td:before 		{ content:attr(data-title)':'; text-align:right; float:left; margin-right:15px; width:80px; font-weight:700; padding:10px 0; }
+	#job_list tbody td:first-child 	{ padding-top: 5px; }
+	#job_list tbody td:last-child 	{ padding-bottom: 5px; }
 	#job_list .details img			{ float:none; }
+	#job_list tbody td img 			{ display: inline-block; margin: 0; vertical-align: top; }
 }

@@ -334,6 +334,7 @@
 					"FieldType" => "TextareaField",
 					"Label" => "Comments",
 				),
+				"Recipient" => $this->RecipientFieldConfig()
 			);
 	    }
 		
