@@ -1,11 +1,16 @@
 <h1>Position Application</h1>
-<% with findJobby %>
+
+<% with $CurrentJob %>
 	<p><strong>Title:</strong> $Title<br />
 	<strong>Location:</strong> $Location<br />
 <% end_with %>
-$RenderForm
+
+<div class="apply-form form_full">
+	$RenderForm
+</div>
+
 <div id="job_nav">
-	<% with findJobby %>
+	<% with $CurrentJob %>
 		<a href="$JobListingPage.Link">&larr; View all Jobs</a>
 	<% end_with %>
 </div>

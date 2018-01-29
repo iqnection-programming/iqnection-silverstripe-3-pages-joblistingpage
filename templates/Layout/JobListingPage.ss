@@ -1,16 +1,27 @@
 <h1>$Title</h1>
 $Content
-<% if Positions %>
+
+<% if $JobPositions.Count %>
 	<div id="jobs_container">
 		<div id="job-search-box">
-			<h3>Filter Results</h3>
-			<div>
-				<label>Filter By Category:</label>
-				<select id="job-search-category">$CategoriesForDropdown</select>
-			</div>
-			<div>
-				<label>Filter By Keyword:</label>
-				<input id="job-search-filter" value="" />
+			<div class="stacked col2">
+				<div class="fieldgroup-field field">
+					<label>Filter By Category:</label>
+					<div>
+						<select id="job-search-category">
+							<option value="">All</option>
+							<% loop $JobCategories %>
+								<option value="$ID">$Title</option>
+							<% end_loop %>
+						</select>
+					</div>
+				</div>
+				<div class="fieldgroup-field field">
+					<label>Filter By Keyword:</label>
+					<div>
+						<input id="job-search-filter" type="text" value="" />
+					</div>
+				</div>
 			</div>
 		</div>
 		<table cellspacing="1" id="job_list">
@@ -23,10 +34,10 @@ $Content
 				</tr>
 			</thead>
 			<tbody>
-				<% loop Positions %>
-					<tr class="job-row" rel="$JobCategoryID">
+				<% loop $JobPositions %>
+					<tr class="job-row" rel="$JobCategory.ID">
 						<td class="l" data-title="Job Title"><a href="$Link">$Title</a></td>
-						<td class="l" data-title="Category"><a href="$Link">$CategoryName</a></td>
+						<td class="l" data-title="Category"><a href="$Link">$JobCategory.Title</a></td>
 						<td class="l" data-title="Location"><a href="$Link">$Location</a></td>
 						<td class="c" data-title="More Info"><a href="$Link">Details&nbsp;<img src="/iq-joblistingpage/images/magnifier.png"></a></td>
 					</tr>
@@ -34,4 +45,6 @@ $Content
 			</tbody>
 		</table>
 	</div><!--jobs_container-->
+<% else %>
+	<p>There currently aren't any open positions. Please check back later.</p>
 <% end_if %>
