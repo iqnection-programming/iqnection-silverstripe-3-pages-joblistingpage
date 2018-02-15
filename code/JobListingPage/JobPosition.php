@@ -1,12 +1,14 @@
 <?php
 
-namespace IQnection\JobListingPage;
+namespace IQnection\Pages\JobListingPage;
 
 use SilverStripe\ORM;
 use SilverStripe\Forms;
 
 class JobPosition extends ORM\DataObject
 {
+	private static $table_name = 'JobPosition';
+	
 	private static $db = [
 		"SortOrder" => "Int", 
 		"Title" => "Varchar(255)", 

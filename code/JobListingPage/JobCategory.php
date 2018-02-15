@@ -1,6 +1,6 @@
 <?php
 
-namespace IQnection\JobListingPage;
+namespace IQnection\Pages\JobListingPage;
 
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 use SilverStripe\ORM;
@@ -8,6 +8,8 @@ use SilverStripe\Forms;
 
 class JobCategory extends ORM\DataObject
 {
+	private static $table_name = 'JobCategory';
+	
 	private static $db = [
 		"SortOrder" => "Int",  
 		"Title" => "Varchar(255)", 

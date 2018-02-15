@@ -2,7 +2,7 @@
 
 use SilverStripe\Forms;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
-
+use IQnection\Pages\JobListingPage;
 
 class JobListingPage extends FormPage
 {
@@ -10,8 +10,8 @@ class JobListingPage extends FormPage
 	
 	private static $has_many = [
 		"JobListingPageSubmissions" => JobListingPageSubmission::class,
-		"JobCategories" => IQnection\JobListingPage\JobCategory::class,
-		"JobPositions" => IQnection\JobListingPage\JobPosition::class
+		"JobCategories" => JobListingPage\JobCategory::class,
+		"JobPositions" => JobListingPage\JobPosition::class
 	];
 	
 	private static $defaults = [
