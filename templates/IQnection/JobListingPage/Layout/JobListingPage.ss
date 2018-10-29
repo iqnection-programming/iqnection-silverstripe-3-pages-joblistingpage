@@ -1,4 +1,5 @@
 <h1>$Title</h1>
+
 $Content
 
 <% if $JobPositions.Count %>
@@ -39,7 +40,7 @@ $Content
 						<td class="l" data-title="Job Title"><a href="$Link">$Title</a></td>
 						<td class="l" data-title="Category"><a href="$Link">$JobCategory.Title</a></td>
 						<td class="l" data-title="Location"><a href="$Link">$Location</a></td>
-						<td class="c" data-title="More Info"><a href="$Link">Details&nbsp;<img src="/iq-joblistingpage/images/magnifier.png"></a></td>
+						<td class="c" data-title="More Info"><a href="$Link">Details&nbsp;<img src="$resourceURL('iqnection-pages/joblistingpage:images/magnifier.png')"></a></td>
 					</tr>
 				<% end_loop %>                
 			</tbody>

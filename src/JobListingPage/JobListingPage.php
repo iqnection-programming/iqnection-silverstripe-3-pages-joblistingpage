@@ -1,17 +1,23 @@
 <?php
 
+namespace IQnection\JobListingPage;
+
 use SilverStripe\Forms;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
-use IQnection\Pages\JobListingPage;
+use IQnection\FormPage\FormPage;
 
 class JobListingPage extends FormPage
 {
+	private static $table_name = 'JobListingPage';
+	private static $singular_name = 'Job Listing Page';
+	private static $plural_name = 'Job Listing Pages';
+	
 	private static $db = [];
 	
 	private static $has_many = [
-		"JobListingPageSubmissions" => JobListingPageSubmission::class,
-		"JobCategories" => JobListingPage\JobCategory::class,
-		"JobPositions" => JobListingPage\JobPosition::class
+		"JobListingPageSubmissions" => Model\JobListingPageSubmission::class,
+		"JobCategories" => Model\JobCategory::class,
+		"JobPositions" => Model\JobPosition::class
 	];
 	
 	private static $defaults = [

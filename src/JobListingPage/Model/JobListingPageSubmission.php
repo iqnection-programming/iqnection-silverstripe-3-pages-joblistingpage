@@ -1,9 +1,17 @@
 <?php
 
+namespace IQnection\JobListingPage\Model;
+
+use IQnection\JobListingPage;
 use SilverStripe\Assets\File;
+use IQnection\FormPage\Model\FormPageSubmission;
 
 class JobListingPageSubmission extends FormPageSubmission
 {
+	private static $table_name = 'JobListingPageSubmission';
+	private static $singular_name = 'Submission';
+	private static $plural_name = 'Submissions';
+	
 	private static $db = [
 		'JobTitle' => 'Varchar(255)',
 		'JobLocation' => 'Varchar(255)',

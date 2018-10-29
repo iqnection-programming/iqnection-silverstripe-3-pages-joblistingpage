@@ -1,7 +1,7 @@
 {
 	"name": "iqnection-pages/joblistingpage",
 	"description": "SilverStripe Job Listing Page",
-	"type": "silverstripe-module",
+	"type": "silverstripe-vendormodule",
 	"license": "BSD-3-Clause",
 	"keywords": ["iqnection","pages"],
 	"authors": [
@@ -12,9 +12,18 @@
 	],
 	"require": {
 		"silverstripe/framework": "^4.0",
-		"iqnection-pages/basepages":"*"
+		"iqnection-pages/basepages":"^2.1"
 	},
 	"extra": {
-		"installer-name": "iq-joblistingpage"
+		"expose": [
+			"css",
+			"images",
+			"javascript"
+		]
+	},
+	"autoload": {
+		"psr-4": {
+			"IQnection\\JobListingPage\\": "app/src/"
+		}
 	}
 }

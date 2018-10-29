@@ -1,6 +1,9 @@
 ## Package: iqnection-silverstripe-joblistingpage
 # Change Log
 
+## [2.2.0]
+- Fully updated for SilverStripe 4.2+
+
 ## [2.1.0]
 - added $table_name to namespaced data objects
 

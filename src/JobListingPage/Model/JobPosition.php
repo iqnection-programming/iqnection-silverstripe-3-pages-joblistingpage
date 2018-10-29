@@ -1,13 +1,16 @@
 <?php
 
-namespace IQnection\Pages\JobListingPage;
+namespace IQnection\JobListingPage\Model;
 
+use IQnection\JobListingPage;
 use SilverStripe\ORM;
 use SilverStripe\Forms;
 
 class JobPosition extends ORM\DataObject
 {
 	private static $table_name = 'JobPosition';
+	private static $singular_name = 'Job Position';
+	private static $plural_name = 'Job Positions';
 	
 	private static $db = [
 		"SortOrder" => "Int", 
@@ -17,7 +20,7 @@ class JobPosition extends ORM\DataObject
 	];
 	
 	private static $has_one = [
-		"JobListingPage" => \JobListingPage::class,
+		"JobListingPage" => JobListingPage::class,
 		"JobCategory" => JobCategory::class
 	];
 	
@@ -33,6 +36,8 @@ class JobPosition extends ORM\DataObject
 	{
 		$fields = parent::getCMSFields();
 		
+		$fields->removeByName('FileTracking');
+		$fields->removeByName('LinkTracking');
 		$fields->removeByName('SortOrder');
 		$fields->removeByName('JobListingPageID');
 		$fields->insertBefore('Description', $fields->dataFieldByName('JobCategoryID'));

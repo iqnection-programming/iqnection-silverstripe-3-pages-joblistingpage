@@ -1,7 +1,8 @@
 <?php
 
-namespace IQnection\Pages\JobListingPage;
+namespace IQnection\JobListingPage\Model;
 
+use IQnection\JobListingPage;
 use UndefinedOffset\SortableGridField\Forms\GridFieldSortableRows;
 use SilverStripe\ORM;
 use SilverStripe\Forms;
@@ -9,6 +10,8 @@ use SilverStripe\Forms;
 class JobCategory extends ORM\DataObject
 {
 	private static $table_name = 'JobCategory';
+	private static $singular_name = 'Job Category';
+	private static $plural_name = 'Job Categories';
 	
 	private static $db = [
 		"SortOrder" => "Int",  
@@ -16,7 +19,7 @@ class JobCategory extends ORM\DataObject
 	];
 	
 	private static $has_one = [
-		"JobListingPage" => \JobListingPage::class
+		"JobListingPage" => JobListingPage::class
 	];
 	
 	private static $has_many = [
@@ -32,6 +35,8 @@ class JobCategory extends ORM\DataObject
 	public function getCMSFields()
 	{
 		$fields = parent::getCMSFields();
+		$fields->removeByName('FileTracking');
+		$fields->removeByName('LinkTracking');
 		$fields->removeByName('SortOrder');
 		$fields->removeByName('JobPositions');
 		if ($this->Exists())
