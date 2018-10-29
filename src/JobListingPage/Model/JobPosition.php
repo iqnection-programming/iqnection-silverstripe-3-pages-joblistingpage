@@ -20,7 +20,7 @@ class JobPosition extends ORM\DataObject
 	];
 	
 	private static $has_one = [
-		"JobListingPage" => JobListingPage::class,
+		"JobListingPage" => JobListingPage\JobListingPage::class,
 		"JobCategory" => JobCategory::class
 	];
 	

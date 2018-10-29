@@ -1,8 +1,8 @@
 <h1>Position Details</h1>
 <% if $CurrentJob.Exists %>
 	<% with $CurrentJob %>
-		<p><strong>Title:</strong> $Title<br />
-		<strong>Location:</strong> $Location<br />
+		<h2>Title: $Title<br />
+			Location: $Location</h2>
 		$Description
 		<div id="job_nav">
 			<a href="$JobListingPage.Link">&larr; View all Jobs</a>

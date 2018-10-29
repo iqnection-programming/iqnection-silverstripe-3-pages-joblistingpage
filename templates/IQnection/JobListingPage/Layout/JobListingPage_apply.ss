@@ -1,8 +1,8 @@
 <h1>Position Application</h1>
 
 <% with $CurrentJob %>
-	<p><strong>Title:</strong> $Title<br />
-	<strong>Location:</strong> $Location<br />
+	<h2>Title: $Title<br />
+		Location: $Location</h2>
 <% end_with %>
 
 <div class="apply-form form_full">

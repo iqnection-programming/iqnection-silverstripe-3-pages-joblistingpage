@@ -13,9 +13,10 @@ class JobListingPageController extends FormPageController
 	
 	public function PageJS()
 	{
-		return [
-			"javascript/jquery.tablesorter.min.js"
-		];
+		return array_merge(
+			parent::PageJS(),
+			["javascript/jquery.tablesorter.min.js"]
+		);
 	}
 	
 	public function FormConfig()
