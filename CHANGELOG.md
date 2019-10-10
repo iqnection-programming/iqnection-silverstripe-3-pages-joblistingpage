@@ -1,6 +1,10 @@
 ## Package: iqnection-silverstripe-joblistingpage
 # Change Log
 
+## [2.2.1]
+- More extendable
+- Bug fix - incorrect class name referenced in JobCategory.php has_many
+
 ## [2.2.0]
 - Fully updated for SilverStripe 4.2+
 

@@ -23,7 +23,7 @@ class JobCategory extends ORM\DataObject
 	];
 	
 	private static $has_many = [
-		'JobPositions' => JobListingPage\JobPosition::class
+		'JobPositions' => JobPosition::class
 	];
 	
 	private static $summary_fields = [

@@ -106,7 +106,9 @@ class JobListingPageController extends FormPageController
 	
 	public function CurrentJob()
 	{
-		return $this->JobPositions()->byID($this->request->param('ID'));
+		$currentJob = $this->JobPositions()->byID($this->request->param('ID'));
+		$this->extend('updateCurrentJob',$currentJob);
+		return $currentJob;
 	}
 	
 	public function details()
